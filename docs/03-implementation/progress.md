@@ -42,7 +42,7 @@ Cross-linking is enforced at type level and asserted reciprocal in
 The consultation form previously validated and then discarded the submission. It now
 persists to Supabase.
 
-- `supabase/migrations/0001_booking_requests.sql` — table, constraints, RLS.
+- `supabase/migrations/20261124130000_booking_requests.sql` — table, constraints, RLS.
 - `src/lib/supabase.ts` — lazily loaded client, returns null when unconfigured.
 - `src/features/booking/submitBooking.ts` — submission adapter.
 - `src/features/booking/BookingFlow.tsx` — sending state, failure message, answers

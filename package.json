@@ -18,7 +18,11 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "test": "vitest",
     "test:run": "vitest run",
-    "validate": "tsc -b --noEmit && eslint . && vitest run"
+    "validate": "tsc -b --noEmit && eslint . && vitest run",
+    "db:login": "supabase login",
+    "db:link": "supabase link",
+    "db:push": "supabase db push",
+    "db:status": "supabase projects list"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
@@ -58,6 +62,7 @@
     "playwright": "^1.65.1",
     "prettier": "^3.5.3",
     "sharp": "^0.35.5",
+    "supabase": "^3.3.0",
     "tailwindcss": "^4.1.8",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.33.1",

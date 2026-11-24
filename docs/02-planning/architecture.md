@@ -231,7 +231,7 @@ What the change does introduce:
 - **Residency.** The Supabase project region determines where the data physically lives.
   Choose it before going live; it cannot be changed afterwards without a migration.
 
-Security model, in full, in `supabase/migrations/0001_booking_requests.sql`: RLS is on, the
+Security model, in full, in `supabase/migrations/20261124130000_booking_requests.sql`: RLS is on, the
 anon role holds `INSERT` only, and no `SELECT` policy or privilege exists for it. The anon
 key in the bundle is therefore write-only. Reading submissions requires the `service_role`
 key, which must never reach the client.

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import * as NavigationMenu from '@radix-ui/react-navigation-menu'
 import { ArrowRight, ChevronDown, ChevronLeft, Menu, X } from 'lucide-react'
@@ -412,8 +413,23 @@ const PANEL_TITLES: Record<Exclude<Panel, 'root'>, string> = {
   countries: 'Countries',
 }
 
+/**
+ * Rendered through a portal to <body>.
+ *
+ * The header carries `backdrop-blur`, and a backdrop-filter establishes a
+ * containing block for fixed descendants. Inside the header, this drawer's
+ * `bottom-0` resolved to the header's own bottom edge, collapsing it to 1px
+ * tall — the links were in the DOM but nothing was visible. A portal takes it
+ * out of that containing block, and keeps it immune to any filter or
+ * transform added to the header later.
+ */
 function MobileNav({ onNavigate }: { onNavigate: () => void }) {
   const [panel, setPanel] = useState<Panel>('root')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const rootItems: { label: string; panel: Exclude<Panel, 'root'>; count: number }[] = [
     { label: 'Who we help', panel: 'divisions', count: divisions.length },
@@ -430,10 +446,12 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
     { to: '/contact/', label: 'Contact' },
   ]
 
-  return (
+  if (!mounted) return null
+
+  return createPortal(
     <div
       id="mobile-nav"
-      className="fixed inset-x-0 bottom-0 top-[4.25rem] z-40 overflow-y-auto overscroll-contain border-t border-rule bg-paper xl:hidden"
+      className="fixed inset-x-0 top-[4.25rem] z-[60] h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t border-rule bg-paper xl:hidden"
     >
       <Container className="py-5">
         {panel !== 'root' ? (
@@ -554,7 +572,7 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
                       onClick={onNavigate}
                       className="flex items-baseline gap-2.5 text-sm leading-snug"
                     >
-                      <span className="form-number w-[5.5rem] shrink-0 text-ink-900">
+                      <span className="form-number w-[7rem] shrink-0 whitespace-nowrap text-[0.78rem] text-ink-900">
                         {f.formNumber}
                       </span>
                       <span className="min-w-0 text-ink-600">
@@ -573,6 +591,7 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
           </Button>
         </div>
       </Container>
-    </div>
+    </div>,
+    document.body,
   )
 }
