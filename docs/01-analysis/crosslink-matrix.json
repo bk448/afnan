@@ -1,0 +1,562 @@
+﻿{
+    "_meta":  {
+                  "source":  "docs/01-analysis/sitemap-inventory.md primary-service column, expanded and adversarially verified",
+                  "generatedBy":  "crosslink-matrix workflow, 14 agents, 0 errors",
+                  "servicesMapped":  23,
+                  "verifierIssuesRaisedAndCorrected":  57,
+                  "invalidSlugsStripped":  0,
+                  "primaryLinkViolations":  0,
+                  "orphanForms":  0,
+                  "countriesNotReferencedByAnyService":  [
+                                                             "israel",
+                                                             "uae",
+                                                             "spain",
+                                                             "portugal",
+                                                             "netherlands",
+                                                             "italy",
+                                                             "ireland",
+                                                             "singapore"
+                                                         ],
+                  "note":  "Service-\u003ecountry is intentionally sparse: most services are citizenship-based and country-neutral. Country-\u003eservice is the load-bearing direction."
+              },
+    "services":  {
+                     "expat-tax-returns":  {
+                                               "relatedForms":  [
+                                                                    "1040",
+                                                                    "4868",
+                                                                    "2350",
+                                                                    "1040-es",
+                                                                    "2555",
+                                                                    "1116"
+                                                                ],
+                                               "relatedDivisions":  [
+                                                                        "individuals-families",
+                                                                        "green-card-holders",
+                                                                        "business"
+                                                                    ],
+                                               "relatedCountries":  [
+
+                                                                    ],
+                                               "rationale":  "The base return, its extension and estimated-payment forms, plus the exclusion and credit forms that commonly accompany an expatriate return; citizenship-based, so country-neutral."
+                                           },
+                     "fbar":  {
+                                  "relatedForms":  [
+                                                       "fbar",
+                                                       "schedule-b",
+                                                       "8938"
+                                                   ],
+                                  "relatedDivisions":  [
+                                                           "individuals-families",
+                                                           "catch-up",
+                                                           "business"
+                                                       ],
+                                  "relatedCountries":  [
+
+                                                       ],
+                                  "rationale":  "FinCEN 114, the Schedule B foreign-account questions and Form 8938 cover overlapping accounts; the obligation is account-based rather than country-specific."
+                              },
+                     "fatca":  {
+                                   "relatedForms":  [
+                                                        "8938",
+                                                        "fbar",
+                                                        "8621"
+                                                    ],
+                                   "relatedDivisions":  [
+                                                            "individuals-families",
+                                                            "catch-up",
+                                                            "private-client"
+                                                        ],
+                                   "relatedCountries":  [
+
+                                                        ],
+                                   "rationale":  "Form 8938 overlaps FBAR and reaches pooled foreign funds reported on Form 8621; the obligation is asset-based rather than country-specific."
+                               },
+                     "state-tax":  {
+                                       "relatedForms":  [
+                                                            "1040",
+                                                            "schedule-e",
+                                                            "1040-es"
+                                                        ],
+                                       "relatedDivisions":  [
+                                                                "relocation",
+                                                                "individuals-families",
+                                                                "private-client"
+                                                            ],
+                                       "relatedCountries":  [
+
+                                                            ],
+                                       "rationale":  "State returns build on the federal return, and retained rental property and estimated payments are the usual state touchpoints; state rules are domestic."
+                                   },
+                     "streamlined-filing":  {
+                                                "relatedForms":  [
+                                                                     "14653",
+                                                                     "14654",
+                                                                     "1040",
+                                                                     "1040-x",
+                                                                     "fbar",
+                                                                     "8938"
+                                                                 ],
+                                                "relatedDivisions":  [
+                                                                         "catch-up",
+                                                                         "green-card-holders"
+                                                                     ],
+                                                "relatedCountries":  [
+
+                                                                     ],
+                                                "rationale":  "Streamlined submissions pair the SFOP and SDOP certifications with back-year returns, FBARs and asset statements; catch-up and green-card-holder divisions are the audiences."
+                                            },
+                     "delinquent-submissions":  {
+                                                    "relatedForms":  [
+                                                                         "fbar",
+                                                                         "8938",
+                                                                         "5471",
+                                                                         "3520"
+                                                                     ],
+                                                    "relatedDivisions":  [
+                                                                             "catch-up",
+                                                                             "business",
+                                                                             "private-client"
+                                                                         ],
+                                                    "relatedCountries":  [
+
+                                                                         ],
+                                                    "rationale":  "Late FBAR and information-return work centres on the account, asset, entity and trust reports; catch-up, business and private-client are the divisions involved."
+                                                },
+                     "amended-returns":  {
+                                             "relatedForms":  [
+                                                                  "1040-x",
+                                                                  "1040",
+                                                                  "2555",
+                                                                  "1116"
+                                                              ],
+                                             "relatedDivisions":  [
+                                                                      "individuals-families",
+                                                                      "catch-up"
+                                                                  ],
+                                             "relatedCountries":  [
+
+                                                                  ],
+                                             "rationale":  "Amending a prior-year Form 1040 runs through 1040-X, commonly to correct the exclusion or foreign tax credit, for individuals and catch-up filers."
+                                         },
+                     "feie-ftc":  {
+                                      "relatedForms":  [
+                                                           "2555",
+                                                           "1116",
+                                                           "2350"
+                                                       ],
+                                      "relatedDivisions":  [
+                                                               "individuals-families",
+                                                               "business",
+                                                               "green-card-holders"
+                                                           ],
+                                      "relatedCountries":  [
+
+                                                           ],
+                                      "rationale":  "Forms 2555 and 1116 are this service\u0027s own filings; Form 2350 is the extension used while meeting the exclusion\u0027s residence tests. Mechanisms are country-neutral."
+                                  },
+                     "tax-treaties":  {
+                                          "relatedForms":  [
+                                                               "8833",
+                                                               "1040-nr",
+                                                               "1116"
+                                                           ],
+                                          "relatedDivisions":  [
+                                                                   "relocation",
+                                                                   "green-card-holders"
+                                                               ],
+                                          "relatedCountries":  [
+                                                                   "uk",
+                                                                   "canada",
+                                                                   "france",
+                                                                   "germany",
+                                                                   "switzerland"
+                                                               ],
+                                          "rationale":  "Form 8833 discloses treaty positions, including on Form 1040-NR; Form 1116 reflects treaty re-sourcing; these countries\u0027 pension and residence articles drive most analysis."
+                                      },
+                     "totalization":  {
+                                          "relatedForms":  [
+                                                               "schedule-c-se",
+                                                               "1040-es"
+                                                           ],
+                                          "relatedDivisions":  [
+                                                                   "business",
+                                                                   "individuals-families"
+                                                               ],
+                                          "relatedCountries":  [
+
+                                                               ],
+                                          "rationale":  "Schedule C/SE computes self-employment tax; Form 1040-ES is the payment mechanism. Agreement coverage is case-specific, so no country is singled out."
+                                      },
+                     "foreign-pensions":  {
+                                              "relatedForms":  [
+                                                                   "8606",
+                                                                   "8833",
+                                                                   "8938",
+                                                                   "fbar"
+                                                               ],
+                                              "relatedDivisions":  [
+                                                                       "individuals-families",
+                                                                       "private-client"
+                                                                   ],
+                                              "relatedCountries":  [
+                                                                       "uk",
+                                                                       "australia",
+                                                                       "canada",
+                                                                       "switzerland"
+                                                                   ],
+                                              "rationale":  "Foreign plans raise account-reporting, treaty and distribution questions; the listed countries have named vehicles (SIPPs, superannuation, RRSPs, Pillar 3a) that shape the analysis."
+                                          },
+                     "pfic":  {
+                                  "relatedForms":  [
+                                                       "8621",
+                                                       "8938",
+                                                       "8960"
+                                                   ],
+                                  "relatedDivisions":  [
+                                                           "individuals-families",
+                                                           "private-client",
+                                                           "catch-up"
+                                                       ],
+                                  "relatedCountries":  [
+                                                           "uk",
+                                                           "canada",
+                                                           "japan"
+                                                       ],
+                                  "rationale":  "Form 8621 is the core filing; 8938 and 8960 cover the holding and its income. Listed countries market pooled retail funds (ISAs, TFSAs, NISAs)."
+                              },
+                     "foreign-property":  {
+                                              "relatedForms":  [
+                                                                   "schedule-e",
+                                                                   "1116",
+                                                                   "8960"
+                                                               ],
+                                              "relatedDivisions":  [
+                                                                       "individuals-families",
+                                                                       "private-client"
+                                                                   ],
+                                              "relatedCountries":  [
+                                                                       "mexico"
+                                                                   ],
+                                              "rationale":  "Rental and sale income runs through Schedule E with foreign-credit and investment-income questions; Mexico\u0027s fideicomiso is a real local property-holding structure."
+                                          },
+                     "equity-compensation":  {
+                                                 "relatedForms":  [
+                                                                      "2555",
+                                                                      "1116",
+                                                                      "1040-es"
+                                                                  ],
+                                                 "relatedDivisions":  [
+                                                                          "individuals-families",
+                                                                          "relocation",
+                                                                          "private-client"
+                                                                      ],
+                                                 "relatedCountries":  [
+
+                                                                      ],
+                                                 "rationale":  "Vesting, exercise and sale raise sourcing, exclusion, credit and estimated-payment questions; treatment follows workdays rather than local account types, so no countries are listed."
+                                             },
+                     "foreign-entities":  {
+                                              "relatedForms":  [
+                                                                   "5471",
+                                                                   "8865",
+                                                                   "8858",
+                                                                   "926",
+                                                                   "8992"
+                                                               ],
+                                              "relatedDivisions":  [
+                                                                       "business",
+                                                                       "private-client",
+                                                                       "catch-up"
+                                                                   ],
+                                              "relatedCountries":  [
+
+                                                                   ],
+                                              "rationale":  "These returns report US ownership of foreign corporations, partnerships, disregarded entities and property transfers; 8992 draws on the same CFC data. Obligations are country-neutral."
+                                          },
+                     "gilti":  {
+                                   "relatedForms":  [
+                                                        "8992",
+                                                        "5471",
+                                                        "1116"
+                                                    ],
+                                   "relatedDivisions":  [
+                                                            "business",
+                                                            "private-client"
+                                                        ],
+                                   "relatedCountries":  [
+
+                                                        ],
+                                   "rationale":  "GILTI and Subpart F inclusions derive from CFC data on 5471; 8992 computes the inclusion, 1116 carries its separate credit category. Rules are country-neutral."
+                               },
+                     "non-us-spouse":  {
+                                           "relatedForms":  [
+                                                                "1040",
+                                                                "schedule-8812",
+                                                                "1040-nr",
+                                                                "fbar",
+                                                                "8938",
+                                                                "709"
+                                                            ],
+                                           "relatedDivisions":  [
+                                                                    "individuals-families",
+                                                                    "green-card-holders"
+                                                                ],
+                                           "relatedCountries":  [
+
+                                                                ],
+                                           "rationale":  "Filing status with a non-US spouse can involve joint-return elections, child credits, nonresident returns, joint-account reporting and spousal gifts; the issues are country-neutral."
+                                       },
+                     "foreign-trusts-gifts":  {
+                                                  "relatedForms":  [
+                                                                       "3520",
+                                                                       "3520-a",
+                                                                       "8938",
+                                                                       "fbar",
+                                                                       "8621",
+                                                                       "schedule-b"
+                                                                   ],
+                                                  "relatedDivisions":  [
+                                                                           "private-client",
+                                                                           "individuals-families",
+                                                                           "catch-up"
+                                                                       ],
+                                                  "relatedCountries":  [
+                                                                           "canada",
+                                                                           "uk",
+                                                                           "mexico"
+                                                                       ],
+                                                  "rationale":  "Foreign trust and inheritance reporting centres on 3520 and 3520-A, with account, asset and PFIC overlap; RESPs, fideicomisos and UK trusts are locally specific."
+                                              },
+                     "gift-estate-tax":  {
+                                             "relatedForms":  [
+                                                                  "709",
+                                                                  "706",
+                                                                  "3520"
+                                                              ],
+                                             "relatedDivisions":  [
+                                                                      "private-client",
+                                                                      "green-card-holders"
+                                                                  ],
+                                             "relatedCountries":  [
+                                                                      "uk",
+                                                                      "germany",
+                                                                      "france"
+                                                                  ],
+                                             "rationale":  "US transfer tax is reported on 709 and 706, inbound foreign gifts on 3520; the UK, German and French treaties address domicile and situs."
+                                         },
+                     "relocation":  {
+                                        "relatedForms":  [
+                                                             "1040",
+                                                             "1040-nr",
+                                                             "2350",
+                                                             "2555"
+                                                         ],
+                                        "relatedDivisions":  [
+                                                                 "relocation",
+                                                                 "green-card-holders"
+                                                             ],
+                                        "relatedCountries":  [
+
+                                                             ],
+                                        "rationale":  "A move year can involve both 1040 and 1040-NR, plus the abroad extension and a part-year exclusion; movers and green card holders meet these."
+                                    },
+                     "expatriation":  {
+                                          "relatedForms":  [
+                                                               "8854",
+                                                               "1040-nr",
+                                                               "8938"
+                                                           ],
+                                          "relatedDivisions":  [
+                                                                   "green-card-holders",
+                                                                   "private-client",
+                                                                   "catch-up"
+                                                               ],
+                                          "relatedCountries":  [
+
+                                                               ],
+                                          "rationale":  "Form 8854 is reviewed with final-year filings, later nonresident returns and specified-asset reporting; prior compliance history concerns long-term residents and private clients."
+                                      },
+                     "tax-planning":  {
+                                          "relatedForms":  [
+                                                               "8960",
+                                                               "1040-es",
+                                                               "8606"
+                                                           ],
+                                          "relatedDivisions":  [
+                                                                   "private-client",
+                                                                   "individuals-families",
+                                                                   "relocation"
+                                                               ],
+                                          "relatedCountries":  [
+
+                                                               ],
+                                          "rationale":  "Planning work covers net investment income tax, estimated payments and retirement account basis; the exclusion-versus-credit election belongs to the dedicated service."
+                                      },
+                     "irs-representation":  {
+                                                "relatedForms":  [
+                                                                     "1040-x",
+                                                                     "fbar",
+                                                                     "3520",
+                                                                     "5471"
+                                                                 ],
+                                                "relatedDivisions":  [
+                                                                         "catch-up",
+                                                                         "individuals-families",
+                                                                         "business"
+                                                                     ],
+                                                "relatedCountries":  [
+
+                                                                     ],
+                                                "rationale":  "Notices and penalty matters usually concern amendments or late FBAR, foreign trust and foreign corporation reporting, affecting catch-up, family and business filers."
+                                            }
+                 },
+    "formToServices":  {
+                           "706":  [
+                                       "gift-estate-tax"
+                                   ],
+                           "709":  [
+                                       "gift-estate-tax",
+                                       "non-us-spouse"
+                                   ],
+                           "926":  [
+                                       "foreign-entities"
+                                   ],
+                           "1040":  [
+                                        "amended-returns",
+                                        "expat-tax-returns",
+                                        "non-us-spouse",
+                                        "relocation",
+                                        "state-tax",
+                                        "streamlined-filing"
+                                    ],
+                           "1116":  [
+                                        "amended-returns",
+                                        "equity-compensation",
+                                        "expat-tax-returns",
+                                        "feie-ftc",
+                                        "foreign-property",
+                                        "gilti",
+                                        "tax-treaties"
+                                    ],
+                           "2350":  [
+                                        "expat-tax-returns",
+                                        "feie-ftc",
+                                        "relocation"
+                                    ],
+                           "2555":  [
+                                        "amended-returns",
+                                        "equity-compensation",
+                                        "expat-tax-returns",
+                                        "feie-ftc",
+                                        "relocation"
+                                    ],
+                           "3520":  [
+                                        "delinquent-submissions",
+                                        "foreign-trusts-gifts",
+                                        "gift-estate-tax",
+                                        "irs-representation"
+                                    ],
+                           "4868":  [
+                                        "expat-tax-returns"
+                                    ],
+                           "5471":  [
+                                        "delinquent-submissions",
+                                        "foreign-entities",
+                                        "gilti",
+                                        "irs-representation"
+                                    ],
+                           "8606":  [
+                                        "foreign-pensions",
+                                        "tax-planning"
+                                    ],
+                           "8621":  [
+                                        "fatca",
+                                        "foreign-trusts-gifts",
+                                        "pfic"
+                                    ],
+                           "8833":  [
+                                        "foreign-pensions",
+                                        "tax-treaties"
+                                    ],
+                           "8854":  [
+                                        "expatriation"
+                                    ],
+                           "8858":  [
+                                        "foreign-entities"
+                                    ],
+                           "8865":  [
+                                        "foreign-entities"
+                                    ],
+                           "8938":  [
+                                        "delinquent-submissions",
+                                        "expatriation",
+                                        "fatca",
+                                        "fbar",
+                                        "foreign-pensions",
+                                        "foreign-trusts-gifts",
+                                        "non-us-spouse",
+                                        "pfic",
+                                        "streamlined-filing"
+                                    ],
+                           "8960":  [
+                                        "foreign-property",
+                                        "pfic",
+                                        "tax-planning"
+                                    ],
+                           "8992":  [
+                                        "foreign-entities",
+                                        "gilti"
+                                    ],
+                           "14653":  [
+                                         "streamlined-filing"
+                                     ],
+                           "14654":  [
+                                         "streamlined-filing"
+                                     ],
+                           "schedule-b":  [
+                                              "fbar",
+                                              "foreign-trusts-gifts"
+                                          ],
+                           "schedule-c-se":  [
+                                                 "totalization"
+                                             ],
+                           "schedule-e":  [
+                                              "foreign-property",
+                                              "state-tax"
+                                          ],
+                           "1040-x":  [
+                                          "amended-returns",
+                                          "irs-representation",
+                                          "streamlined-filing"
+                                      ],
+                           "1040-nr":  [
+                                           "expatriation",
+                                           "non-us-spouse",
+                                           "relocation",
+                                           "tax-treaties"
+                                       ],
+                           "1040-es":  [
+                                           "equity-compensation",
+                                           "expat-tax-returns",
+                                           "state-tax",
+                                           "tax-planning",
+                                           "totalization"
+                                       ],
+                           "schedule-8812":  [
+                                                 "non-us-spouse"
+                                             ],
+                           "fbar":  [
+                                        "delinquent-submissions",
+                                        "fatca",
+                                        "fbar",
+                                        "foreign-pensions",
+                                        "foreign-trusts-gifts",
+                                        "irs-representation",
+                                        "non-us-spouse",
+                                        "streamlined-filing"
+                                    ],
+                           "3520-a":  [
+                                          "foreign-trusts-gifts"
+                                      ]
+                       }
+}
