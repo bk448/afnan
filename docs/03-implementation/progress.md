@@ -49,6 +49,20 @@ persists to Supabase.
   preserved on failure so nothing is retyped.
 - 9 tests in `src/features/booking/__tests__/submitBooking.test.ts`.
 
+**Live and verified against the real project on 2026-11-24.** Project `jungletax_afnan`
+(ref `ryloghtiskodsvlldtnp`, Seoul). Three checks run directly against the REST API with the
+publishable key:
+
+| Check | Result |
+| ----- | ------ |
+| Insert a valid request | HTTP 201 |
+| Read rows back with the public key | HTTP 401 — `permission denied for table booking_requests` |
+| Insert with `consent: false` | HTTP 401 — `new row violates row-level security policy` |
+
+Both layers fire independently: the privilege grant blocks the read, and the policy check
+blocks the forged consent. One test row (`connection-test@example.invalid`) was written and
+should be deleted from the Table Editor.
+
 Security: RLS on, anon granted `INSERT` only, with no `SELECT` policy or privilege.
 Submissions are write-only from the browser; reading requires the `service_role` key.
 This reverses a documented scope boundary — see `docs/02-planning/architecture.md` §7.1.
@@ -66,7 +80,7 @@ is not in any page's `modulepreload` set.
 | # | Item | Notes |
 | - | ---- | ----- |
 | 1 | **All 77 content entries are `reviewStatus: 'draft'`** | No tax professional has reviewed any page copy. Highest-liability item on the project. |
-| 2 | **Migration not yet run** | Project `jungletax_afnan` (ref `ryloghtiskodsvlldtnp`) exists and is healthy. Dashboard reports "No migrations" — the table does not exist yet. `.env.local` has the URL but still needs the anon key. |
+| 2 | **Database password was exposed in plaintext** | The password chosen during project creation was pasted into a chat transcript alongside the project ref. A direct Postgres connection bypasses RLS entirely, so this must be reset: Project Settings -> Database -> Reset database password. |
 | 3 | **No notification on submission** | A request sits in the table until someone looks. Needs an email trigger or a webhook. |
 | 4 | **`/privacy/` does not mention Supabase** | Required now that personal data is stored. Must name Supabase as processor, disclose **Seoul (`ap-northeast-2`)** as the processing location and the resulting international transfer, and state a lawful basis and retention period. |
 | 5 | **No spam or abuse control on the insert** | The endpoint is public by design. Consider Turnstile or a Supabase Edge Function in front of the insert. |
