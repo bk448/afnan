@@ -1,0 +1,633 @@
+<title>Jungle Tax Style Tile</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  /* Layout concept: single measured column on warm paper, sections divided by hairline
+     rules rather than cards. Institutional editorial — authority from type and
+     whitespace. Deliberately single-theme: the brief forbids a dark mode, so the two
+     dark blocks are omitted by choice and every colour is set explicitly. */
+
+  :root {
+    /* Core palette — from the brief, unchanged */
+    --ink: #0E2238;
+    --ink-hover: #1B3350;
+    --paper: #FAF8F5;
+    --surface: #F1EEE9;
+    --rule: #DDD7CE;
+    --accent: #9A6B3F;
+    --alert: #8A2B2B;
+
+    /* Derived tokens — added to meet WCAG 2.2 AA. See the contrast table. */
+    --ink-muted: #46556A;    /* 7.16:1 on paper — secondary text */
+    --accent-text: #8A5F38;  /* 5.25:1 on paper — inline links, small text */
+    --rule-strong: #8C857B;  /* 3.44:1 on paper — control borders */
+
+    /* Type */
+    --display: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+    --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    /* Modular scale, 1.26 from a 17px body */
+    --t-caption: 0.8125rem;  /* 13 */
+    --t-small:   0.9375rem;  /* 15 */
+    --t-body:    1.0625rem;  /* 17 */
+    --t-lead:    1.25rem;    /* 20 */
+    --t-h4:      1.5rem;     /* 24 */
+    --t-h3:      1.875rem;   /* 30 */
+    --t-h2:      2.375rem;   /* 38 */
+    --t-h1:      3rem;       /* 48 */
+
+    /* Spacing — 4px base */
+    --s1: 0.25rem; --s2: 0.5rem;  --s3: 0.75rem; --s4: 1rem;
+    --s6: 1.5rem;  --s8: 2rem;    --s12: 3rem;   --s16: 4rem;
+
+    --r-control: 4px;
+    --r-panel: 6px;
+
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --dur: 170ms;
+
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: var(--t-body);
+    line-height: 1.65;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: var(--s12) var(--s16);
+  }
+
+  .prose { max-width: 68ch; }
+
+  h1, h2, h3, h4 {
+    font-family: var(--display);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    text-wrap: balance;
+    margin: 0;
+  }
+  h1 { font-size: var(--t-h1); }
+  h2 { font-size: var(--t-h2); }
+  h3 { font-size: var(--t-h3); }
+  h4 { font-size: var(--t-h4); }
+
+  p { margin: 0 0 var(--s4); }
+  a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--ink); }
+
+  .label {
+    font-family: var(--body);
+    font-size: var(--t-caption);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .muted { color: var(--ink-muted); }
+  .lead { font-size: var(--t-lead); line-height: 1.5; color: var(--ink-muted); }
+
+  /* Sections divided by rules, not cards */
+  section { border-top: 1px solid var(--rule); padding-block: var(--s12); }
+  section > .label { display: block; margin-bottom: var(--s2); }
+  .sec-head { margin-bottom: var(--s8); }
+  .sec-head p { margin: var(--s3) 0 0; }
+
+  .grid { display: grid; gap: var(--s6); }
+  .g2 { grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); }
+  .g3 { grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); }
+
+  /* ---- Colour ---- */
+  .sw { border: 1px solid var(--rule); border-radius: var(--r-panel); overflow: hidden; }
+  .sw-chip { height: 96px; }
+  .sw-meta { padding: var(--s3) var(--s4); background: var(--paper); border-top: 1px solid var(--rule); }
+  .sw-name { font-weight: 600; font-size: var(--t-small); }
+  .sw-hex { font-family: var(--mono); font-size: var(--t-caption); color: var(--ink-muted); }
+  .sw-use { font-size: var(--t-caption); color: var(--ink-muted); margin-top: var(--s1); }
+
+  /* ---- Tables ---- */
+  table { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
+  caption { text-align: left; font-size: var(--t-caption); color: var(--ink-muted); padding-bottom: var(--s3); }
+  th, td { text-align: left; padding: var(--s3) var(--s4); border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 600; font-size: var(--t-caption); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-muted); }
+  tbody tr:nth-child(odd) { background: var(--surface); }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .pass { color: var(--ink); font-weight: 500; }
+  .fail { color: var(--alert); font-weight: 600; }
+  .scroller { overflow-x: auto; }
+
+  /* ---- Type specimen ---- */
+  .spec { border-bottom: 1px solid var(--rule); padding-block: var(--s4); display: flex; gap: var(--s6); align-items: baseline; flex-wrap: wrap; }
+  .spec-meta { font-family: var(--mono); font-size: var(--t-caption); color: var(--ink-muted); min-width: 10ch; }
+  .spec-sample { min-width: 0; flex: 1; }
+
+  /* ---- Form numbers: the signature treatment ---- */
+  .fnum {
+    font-family: var(--mono);
+    font-size: 0.9em;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-control);
+    padding: 0.1em 0.4em;
+    white-space: nowrap;
+  }
+  a .fnum, .fnum-link { color: var(--accent-text); }
+
+  /* ---- Buttons ---- */
+  .btn {
+    font-family: var(--body);
+    font-size: var(--t-small);
+    font-weight: 500;
+    line-height: 1;
+    padding: var(--s3) var(--s6);
+    border-radius: var(--r-control);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .btn-primary:hover { background: var(--ink-hover); border-color: var(--ink-hover); color: var(--paper); }
+  .btn-secondary { background: transparent; color: var(--ink); border-color: var(--rule-strong); }
+  .btn-secondary:hover { background: var(--surface); border-color: var(--ink); color: var(--ink); }
+  .btn-tertiary { background: none; border: none; color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; padding: var(--s3) 0; }
+  .btn-tertiary:hover { color: var(--ink); }
+  .btn:disabled, .btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
+  .btn:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .btn-row { display: flex; gap: var(--s4); align-items: center; flex-wrap: wrap; }
+
+  /* ---- Inputs ---- */
+  .field { margin-bottom: var(--s6); max-width: 42ch; }
+  .field label { display: block; font-size: var(--t-small); font-weight: 500; margin-bottom: var(--s2); }
+  .field .hint { font-size: var(--t-caption); color: var(--ink-muted); margin-bottom: var(--s2); }
+  input[type="text"], input[type="email"], select, textarea {
+    width: 100%;
+    font-family: var(--body);
+    font-size: var(--t-body);
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--r-control);
+    padding: var(--s3) var(--s4);
+    transition: border-color var(--dur) var(--ease);
+  }
+  input:hover, select:hover, textarea:hover { border-color: var(--ink-muted); }
+  .field-error input { border-color: var(--alert); border-width: 1px; }
+  .err { color: var(--alert); font-size: var(--t-small); margin-top: var(--s2); display: block; }
+
+  /* ---- Panels ---- */
+  .panel { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--r-panel); padding: var(--s6); }
+  .glance { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--r-panel); padding: 0; overflow: hidden; }
+  .glance dl { margin: 0; }
+  .glance .row { display: grid; grid-template-columns: minmax(130px, 22%) 1fr; gap: var(--s4); padding: var(--s3) var(--s6); border-bottom: 1px solid var(--rule); }
+  .glance .row:last-child { border-bottom: none; }
+  .glance dt { font-size: var(--t-caption); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-muted); margin: 0; padding-top: 0.2em; }
+  .glance dd { margin: 0; font-size: var(--t-small); min-width: 0; }
+
+  .disclaimer { border: 1px solid var(--alert); border-left-width: 3px; border-radius: var(--r-panel); padding: var(--s4) var(--s6); background: var(--paper); }
+  .disclaimer .label { color: var(--alert); }
+  .disclaimer p { font-size: var(--t-small); margin: var(--s2) 0 0; }
+
+  /* ---- Cross-link rail ---- */
+  .rail { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding-block: var(--s4); }
+  .rail ul { list-style: none; margin: var(--s3) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s2) var(--s6); }
+  .rail li { font-size: var(--t-small); }
+
+  /* ---- Breadcrumbs ---- */
+  .crumbs { font-size: var(--t-caption); color: var(--ink-muted); }
+  .crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: var(--s2); margin: 0; padding: 0; }
+  .crumbs li::after { content: "/"; margin-left: var(--s2); color: var(--rule-strong); }
+  .crumbs li:last-child::after { content: ""; }
+  .crumbs [aria-current] { color: var(--ink); }
+
+  /* ---- Spacing / radius demos ---- */
+  .bar { background: var(--accent); height: 10px; border-radius: 2px; }
+  .radius-demo { display: flex; gap: var(--s6); flex-wrap: wrap; }
+  .radius-demo div { width: 76px; height: 76px; background: var(--surface); border: 1px solid var(--rule-strong); display: grid; place-items: center; font-family: var(--mono); font-size: var(--t-caption); }
+
+  /* ---- Do / don't ---- */
+  .rules-list { list-style: none; margin: 0; padding: 0; }
+  .rules-list li { padding: var(--s3) 0; border-bottom: 1px solid var(--rule); font-size: var(--t-small); display: grid; grid-template-columns: 11ch 1fr; gap: var(--s4); }
+  .rules-list .no { color: var(--alert); font-weight: 600; font-size: var(--t-caption); letter-spacing: 0.04em; text-transform: uppercase; padding-top: 0.15em; }
+
+  @media (max-width: 560px) {
+    :root { --t-h1: 2.25rem; --t-h2: 1.75rem; --t-h3: 1.4375rem; }
+    .glance .row { grid-template-columns: 1fr; gap: var(--s1); }
+    .rules-list li { grid-template-columns: 1fr; gap: var(--s1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header style="margin-bottom: var(--s12)">
+    <p class="label">Jungle Tax &middot; Layer 2 deliverable</p>
+    <h1 style="margin-top: var(--s4)">Style tile</h1>
+    <p class="lead prose" style="margin-top: var(--s6)">
+      The design system for a US expatriate tax firm's website, rendered for approval
+      before any product UI is built. Institutional editorial: authority from typography
+      and whitespace, not decoration. Every value here is a token defined in one place.
+    </p>
+  </header>
+
+  <section>
+    <p class="label">01 &mdash; Colour</p>
+    <div class="sec-head">
+      <h2>Three families, used sparingly</h2>
+      <p class="prose muted">Brass appears on under 5% of any screen. If a page looks
+      colourful, it is wrong. Alert red is reserved for penalty and deadline warnings and
+      is never used for emphasis.</p>
+    </div>
+
+    <div class="grid g3" style="margin-bottom: var(--s12)">
+      <div class="sw">
+        <div class="sw-chip" style="background:#0E2238"></div>
+        <div class="sw-meta"><div class="sw-name">Ink</div><div class="sw-hex">#0E2238</div>
+        <div class="sw-use">Body text, headers, footers, primary buttons</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#FAF8F5"></div>
+        <div class="sw-meta"><div class="sw-name">Paper</div><div class="sw-hex">#FAF8F5</div>
+        <div class="sw-use">Page background. Never pure white</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#F1EEE9"></div>
+        <div class="sw-meta"><div class="sw-name">Surface</div><div class="sw-hex">#F1EEE9</div>
+        <div class="sw-use">Alternating sections, table rows, panels</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#DDD7CE"></div>
+        <div class="sw-meta"><div class="sw-name">Rule</div><div class="sw-hex">#DDD7CE</div>
+        <div class="sw-use">Hairline dividers only</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#9A6B3F"></div>
+        <div class="sw-meta"><div class="sw-name">Accent &mdash; brass</div><div class="sw-hex">#9A6B3F</div>
+        <div class="sw-use">Large text, focus rings, non-text UI</div></div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#8A2B2B"></div>
+        <div class="sw-meta"><div class="sw-name">Alert</div><div class="sw-hex">#8A2B2B</div>
+        <div class="sw-use">Penalty warnings and deadlines only</div></div>
+      </div>
+    </div>
+
+    <h3 style="font-size: var(--t-h4); margin-bottom: var(--s4)">Measured contrast</h3>
+    <div class="scroller">
+      <table>
+        <caption>Computed WCAG 2.1 relative-luminance ratios, not estimates. The brief
+        sets WCAG 2.2 AA as non-negotiable, so the two failures below are resolved with
+        derived tokens rather than by changing the brand colours.</caption>
+        <thead>
+          <tr><th>Foreground</th><th>On</th><th>Ratio</th><th>Required</th><th>Result</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Ink <span class="num">#0E2238</span></td><td>Paper</td><td class="num">15.19:1</td><td class="num">4.5:1</td><td class="pass">Pass</td></tr>
+          <tr><td>Ink <span class="num">#0E2238</span></td><td>Surface</td><td class="num">13.91:1</td><td class="num">4.5:1</td><td class="pass">Pass</td></tr>
+          <tr><td>Alert <span class="num">#8A2B2B</span></td><td>Paper</td><td class="num">8.05:1</td><td class="num">4.5:1</td><td class="pass">Pass</td></tr>
+          <tr><td>Ink muted <span class="num">#46556A</span></td><td>Paper</td><td class="num">7.16:1</td><td class="num">4.5:1</td><td class="pass">Pass</td></tr>
+          <tr><td>Accent <span class="num">#9A6B3F</span></td><td>Paper</td><td class="num">4.36:1</td><td class="num">4.5:1</td><td class="fail">Fails body text</td></tr>
+          <tr><td>Accent <span class="num">#9A6B3F</span></td><td>Paper</td><td class="num">4.36:1</td><td class="num">3:1</td><td class="pass">Pass, large &amp; non-text</td></tr>
+          <tr><td>Rule <span class="num">#DDD7CE</span></td><td>Paper</td><td class="num">1.35:1</td><td class="num">3:1</td><td class="fail">Fails as control border</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g2" style="margin-top: var(--s8)">
+      <div class="panel">
+        <p class="label">Derived token</p>
+        <p style="margin: var(--s2) 0 var(--s3)"><span class="num" style="font-size:var(--t-lead)">--accent-text: #8A5F38</span></p>
+        <p class="muted" style="font-size: var(--t-small); margin: 0">
+          <span class="num">5.25:1</span> on paper. Used for inline links and any brass
+          text below 18.66px. The brief's brass is retained unchanged for large text,
+          focus rings and non-text UI, where <span class="num">4.36:1</span> clears the
+          <span class="num">3:1</span> requirement comfortably.</p>
+      </div>
+      <div class="panel">
+        <p class="label">Derived token</p>
+        <p style="margin: var(--s2) 0 var(--s3)"><span class="num" style="font-size:var(--t-lead)">--rule-strong: #8C857B</span></p>
+        <p class="muted" style="font-size: var(--t-small); margin: 0">
+          <span class="num">3.44:1</span> on paper. Used for input, select and textarea
+          borders, which are non-text UI components and must reach
+          <span class="num">3:1</span> under SC 1.4.11. The original hairline rule stays
+          for dividers, where no contrast minimum applies.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">02 &mdash; Typography</p>
+    <div class="sec-head">
+      <h2>The primary design tool</h2>
+      <p class="prose muted">A serif carries authority, a grotesque carries clarity, and a
+      mono carries the vocabulary of the domain. Body copy sits at 17px on a 1.65 line
+      height, with the measure capped at 68 characters.</p>
+    </div>
+
+    <div class="grid g3" style="margin-bottom: var(--s8)">
+      <div class="panel">
+        <p class="label">Display</p>
+        <p style="font-family: var(--display); font-size: var(--t-h3); margin: var(--s2) 0">Source Serif 4</p>
+        <p class="muted" style="font-size: var(--t-caption); margin: 0">Headings. 400, 600, 400 italic.</p>
+      </div>
+      <div class="panel">
+        <p class="label">Body &amp; UI</p>
+        <p style="font-family: var(--body); font-size: var(--t-h3); margin: var(--s2) 0">IBM Plex Sans</p>
+        <p class="muted" style="font-size: var(--t-caption); margin: 0">Running text, labels, controls. 400, 500, 600.</p>
+      </div>
+      <div class="panel">
+        <p class="label">Numeric</p>
+        <p style="font-family: var(--mono); font-size: var(--t-h3); margin: var(--s2) 0">IBM Plex Mono</p>
+        <p class="muted" style="font-size: var(--t-caption); margin: 0">Form numbers, figures, dates. 400, 500.</p>
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-meta">48 / 1.15</div>
+      <div class="spec-sample"><span style="font-family: var(--display); font-size: var(--t-h1); font-weight: 600; letter-spacing: -0.015em">Do I still have to file?</span></div>
+    </div>
+    <div class="spec">
+      <div class="spec-meta">38 / 1.15</div>
+      <div class="spec-sample"><span style="font-family: var(--display); font-size: var(--t-h2); font-weight: 600; letter-spacing: -0.015em">Streamlined Filing Compliance Procedures</span></div>
+    </div>
+    <div class="spec">
+      <div class="spec-meta">30 / 1.2</div>
+      <div class="spec-sample"><span style="font-family: var(--display); font-size: var(--t-h3); font-weight: 600">Foreign pensions and retirement accounts</span></div>
+    </div>
+    <div class="spec">
+      <div class="spec-meta">24 / 1.3</div>
+      <div class="spec-sample"><span style="font-family: var(--display); font-size: var(--t-h4); font-weight: 600">Who this applies to</span></div>
+    </div>
+    <div class="spec">
+      <div class="spec-meta">20 / 1.5</div>
+      <div class="spec-sample"><span class="lead">A standfirst sits between the heading and the body, and carries the single most reassuring sentence on the page.</span></div>
+    </div>
+    <div class="spec">
+      <div class="spec-meta">17 / 1.65</div>
+      <div class="spec-sample" style="max-width: 68ch">The United States taxes its citizens on worldwide income based on citizenship rather than residence. If you are a US citizen living abroad, you may have a filing obligation even in years when you owe nothing. A specialist can tell you where you stand.</div>
+    </div>
+    <div class="spec">
+      <div class="spec-meta">15 / 1.6</div>
+      <div class="spec-sample" style="max-width: 68ch"><span style="font-size: var(--t-small)">Supporting text, table cells and field hints sit one step down from body copy.</span></div>
+    </div>
+    <div class="spec">
+      <div class="spec-meta">13 / 1.4</div>
+      <div class="spec-sample"><span class="label">Section label &middot; uppercase, tracked</span></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">03 &mdash; Form numbers</p>
+    <div class="sec-head">
+      <h2>The vocabulary of the domain</h2>
+      <p class="prose muted">People search form numbers, not service names. A form number
+      is a typographic object set in mono, never an incidental string inside a sentence.
+      This is the single most repeated element on the site, across 30 form pages, the
+      mega-menu and body copy.</p>
+    </div>
+
+    <div class="grid g2">
+      <div>
+        <p class="label" style="margin-bottom: var(--s3)">In isolation</p>
+        <p style="display: flex; gap: var(--s3); flex-wrap: wrap; margin-bottom: var(--s8)">
+          <span class="fnum">1040</span>
+          <span class="fnum">2555</span>
+          <span class="fnum">8938</span>
+          <span class="fnum">8621</span>
+          <span class="fnum">3520-A</span>
+          <span class="fnum">5471</span>
+          <span class="fnum">14653</span>
+          <span class="fnum">FinCEN 114</span>
+          <span class="fnum">Schedule B</span>
+        </p>
+        <p class="label" style="margin-bottom: var(--s3)">As a link</p>
+        <p><a href="#0" class="fnum fnum-link">8621</a> &nbsp;
+           <a href="#0" class="fnum fnum-link">1116</a> &nbsp;
+           <a href="#0" class="fnum fnum-link">8854</a></p>
+      </div>
+      <div>
+        <p class="label" style="margin-bottom: var(--s3)">In running text</p>
+        <p style="max-width: 68ch">A US person holding a pooled foreign investment fund
+        may need to report it on Form <span class="fnum">8621</span>, in addition to
+        reporting the account itself on <span class="fnum">FinCEN 114</span> and,
+        separately, on Form <span class="fnum">8938</span>. The three reports overlap but
+        are not interchangeable.</p>
+        <p class="muted" style="font-size: var(--t-caption); max-width: 68ch">
+        Note the tabular figures: <span class="num">1040</span>,
+        <span class="num">1116</span>, <span class="num">8938</span> all occupy identical
+        width, so numbers align down a column in the mega-menu and in tables.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">04 &mdash; Controls</p>
+    <div class="sec-head">
+      <h2>Rectangular, 4px radius, no gradients</h2>
+      <p class="prose muted">One persistent primary action — Book a Consultation — and one
+      secondary. Never more than two competing calls to action on a screen.</p>
+    </div>
+
+    <div class="grid g2">
+      <div>
+        <p class="label" style="margin-bottom: var(--s4)">Default</p>
+        <div class="btn-row" style="margin-bottom: var(--s8)">
+          <button class="btn btn-primary">Book a consultation</button>
+          <button class="btn btn-secondary">Request a quote</button>
+          <button class="btn btn-tertiary">See how it works</button>
+        </div>
+        <p class="label" style="margin-bottom: var(--s4)">Disabled</p>
+        <div class="btn-row">
+          <button class="btn btn-primary" disabled>Book a consultation</button>
+          <button class="btn btn-secondary" disabled>Request a quote</button>
+        </div>
+      </div>
+      <div>
+        <p class="label" style="margin-bottom: var(--s4)">Fields</p>
+        <div class="field">
+          <label for="st-email">Email address</label>
+          <input type="email" id="st-email" placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="st-year">Last year you filed a US return</label>
+          <p class="hint">If you are not sure, choose the closest option.</p>
+          <select id="st-year">
+            <option>I have never filed</option>
+            <option>I do not know</option>
+            <option>Within the last two years</option>
+            <option>Three to five years ago</option>
+            <option>More than five years ago</option>
+          </select>
+        </div>
+        <div class="field field-error">
+          <label for="st-country">Country of residence</label>
+          <input type="text" id="st-country" value="" aria-describedby="st-country-err" aria-invalid="true">
+          <span class="err" id="st-country-err">Enter the country you currently live in.</span>
+        </div>
+        <p class="muted" style="font-size: var(--t-caption); max-width: 48ch">
+          Validation runs on blur, never on keystroke. Errors sit beside their field in
+          plain language and are associated by <span class="num">aria-describedby</span>,
+          never shown as a toast.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">05 &mdash; Surfaces, rules and radii</p>
+    <div class="sec-head">
+      <h2>Hairlines, not shadows</h2>
+      <p class="prose muted">Content is separated by 1px rules. Elevation is used only
+      where it is literal — an open dropdown, a modal — and never on a card.</p>
+    </div>
+
+    <div class="radius-demo" style="margin-bottom: var(--s8)">
+      <div style="border-radius: 4px">4px</div>
+      <div style="border-radius: 6px">6px</div>
+      <div style="border-radius: 0">0</div>
+    </div>
+    <p class="muted" style="font-size: var(--t-small); max-width: 68ch; margin-bottom: var(--s12)">
+      4px for inputs and buttons, 6px for panels, nothing larger. There is no
+      <span class="num">rounded-2xl</span> anywhere in this system.</p>
+
+    <p class="label" style="margin-bottom: var(--s4)">Spacing scale &mdash; 4px base</p>
+    <div class="grid" style="gap: var(--s3); max-width: 560px">
+      <div style="display:grid; grid-template-columns: 7ch 1fr; gap: var(--s4); align-items:center"><span class="num" style="font-size:var(--t-caption)">4px</span><div class="bar" style="width:4px"></div></div>
+      <div style="display:grid; grid-template-columns: 7ch 1fr; gap: var(--s4); align-items:center"><span class="num" style="font-size:var(--t-caption)">8px</span><div class="bar" style="width:8px"></div></div>
+      <div style="display:grid; grid-template-columns: 7ch 1fr; gap: var(--s4); align-items:center"><span class="num" style="font-size:var(--t-caption)">12px</span><div class="bar" style="width:12px"></div></div>
+      <div style="display:grid; grid-template-columns: 7ch 1fr; gap: var(--s4); align-items:center"><span class="num" style="font-size:var(--t-caption)">16px</span><div class="bar" style="width:16px"></div></div>
+      <div style="display:grid; grid-template-columns: 7ch 1fr; gap: var(--s4); align-items:center"><span class="num" style="font-size:var(--t-caption)">24px</span><div class="bar" style="width:24px"></div></div>
+      <div style="display:grid; grid-template-columns: 7ch 1fr; gap: var(--s4); align-items:center"><span class="num" style="font-size:var(--t-caption)">32px</span><div class="bar" style="width:32px"></div></div>
+      <div style="display:grid; grid-template-columns: 7ch 1fr; gap: var(--s4); align-items:center"><span class="num" style="font-size:var(--t-caption)">48px</span><div class="bar" style="width:48px"></div></div>
+      <div style="display:grid; grid-template-columns: 7ch 1fr; gap: var(--s4); align-items:center"><span class="num" style="font-size:var(--t-caption)">64px</span><div class="bar" style="width:64px"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">06 &mdash; Page components</p>
+    <div class="sec-head">
+      <h2>Orientation, summary, disclosure</h2>
+      <p class="prose muted">Visitors arrive from search on deep pages. Each detail page
+      opens with a structured summary before the long-form explanation, and never dead-ends.</p>
+    </div>
+
+    <nav class="crumbs" aria-label="Breadcrumb" style="margin-bottom: var(--s8)">
+      <ol>
+        <li><a href="#0">Home</a></li>
+        <li><a href="#0">Forms</a></li>
+        <li><a href="#0">Foreign Accounts &amp; Assets</a></li>
+        <li aria-current="page">Form 8621</li>
+      </ol>
+    </nav>
+
+    <h3 style="font-size: var(--t-h4); margin-bottom: var(--s4)">At a glance</h3>
+    <div class="glance" style="margin-bottom: var(--s12)">
+      <dl>
+        <div class="row"><dt>Applies to</dt><dd>US persons who hold shares in a passive foreign investment company, including many ordinary foreign mutual funds and exchange-traded funds.</dd></div>
+        <div class="row"><dt>Filed with</dt><dd>The annual federal income tax return, Form <span class="fnum">1040</span>.</dd></div>
+        <div class="row"><dt>Timing</dt><dd>With the return for the year concerned, including any extension granted.</dd></div>
+        <div class="row"><dt>Headline risk</dt><dd>Default tax treatment of an unreported holding can be materially less favourable than the elections available to a timely filer.</dd></div>
+        <div class="row"><dt>Handled by</dt><dd><a href="#0">PFIC Reporting (Foreign Funds)</a></dd></div>
+      </dl>
+    </div>
+
+    <h3 style="font-size: var(--t-h4); margin-bottom: var(--s4)">Cross-link rail</h3>
+    <div class="rail" style="margin-bottom: var(--s12)">
+      <p class="label" style="margin: 0">Forms involved in this service</p>
+      <ul>
+        <li><a href="#0" class="fnum fnum-link">8621</a> &nbsp;PFIC information return</li>
+        <li><a href="#0" class="fnum fnum-link">8938</a> &nbsp;Specified foreign financial assets</li>
+        <li><a href="#0" class="fnum fnum-link">8960</a> &nbsp;Net investment income tax</li>
+      </ul>
+    </div>
+
+    <h3 style="font-size: var(--t-h4); margin-bottom: var(--s4)">Compliance disclaimer</h3>
+    <p class="muted" style="font-size: var(--t-small); max-width: 68ch; margin-bottom: var(--s4)">
+      Required on <span class="num">/services/streamlined-filing/</span> and
+      <span class="num">/services/delinquent-submissions/</span>.</p>
+    <div class="disclaimer">
+      <p class="label">Important</p>
+      <p>This page describes what the Streamlined Filing Compliance Procedures are. It
+      does not assess whether they are available to you. Eligibility depends on a
+      certification of non-willful conduct and on facts specific to your circumstances,
+      which only a qualified adviser can evaluate with you. Nothing on this site creates
+      a client relationship.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">07 &mdash; Motion</p>
+    <div class="sec-head">
+      <h2>Hover, focus and disclosure only</h2>
+      <p class="prose muted">170ms ease-out on interactive state changes. No
+      scroll-triggered reveals, no parallax, no entrance animation. All transitions are
+      disabled under <span class="num">prefers-reduced-motion</span>, which this page
+      honours — hover any button above to see the full extent of motion in this system.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">08 &mdash; Conformance</p>
+    <div class="sec-head">
+      <h2>What this system refuses</h2>
+      <p class="prose muted">The brief names the hallmarks of generic AI output as
+      grounds for rejection. Each is listed here with what this system does instead.</p>
+    </div>
+    <ul class="rules-list">
+      <li><span class="no">Avoided</span><span>Purple, violet and indigo gradients, and Tailwind's default blues &mdash; the palette is navy ink, warm paper and a single brass accent.</span></li>
+      <li><span class="no">Avoided</span><span>Gradient-filled text headings &mdash; headings are solid ink in a serif.</span></li>
+      <li><span class="no">Avoided</span><span>Glassmorphism, backdrop blur and glow &mdash; surfaces are flat, separated by hairlines.</span></li>
+      <li><span class="no">Avoided</span><span>Large pill buttons with gradient fills &mdash; buttons are rectangular at a 4px radius.</span></li>
+      <li><span class="no">Avoided</span><span>Drop shadows on floating cards and rounded-2xl everywhere &mdash; no shadow on any card; maximum radius is 6px.</span></li>
+      <li><span class="no">Avoided</span><span>Emoji as iconography or in headings &mdash; none anywhere in this system.</span></li>
+      <li><span class="no">Avoided</span><span>A centred hero over a blurred gradient blob &mdash; text is left-aligned on flat paper.</span></li>
+      <li><span class="no">Avoided</span><span>Three identical feature cards with coloured circle icons &mdash; content is laid out asymmetrically and divided by rules.</span></li>
+      <li><span class="no">Avoided</span><span>Invented social proof &mdash; no client counts, ratings or logos. The content architecture is the proof.</span></li>
+      <li><span class="no">Avoided</span><span>A dark-mode toggle &mdash; this is deliberately a single-theme system.</span></li>
+      <li><span class="no">Avoided</span><span>Animated borders, marquees and decorative motion &mdash; motion is limited to hover, focus and disclosure.</span></li>
+      <li><span class="no">Avoided</span><span>Vague filler copy &mdash; every string on this page is real domain language.</span></li>
+      <li><span class="no">Avoided</span><span>Inter as the display face &mdash; display is Source Serif 4.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="label">09 &mdash; Handoff</p>
+    <div class="sec-head">
+      <h2>Where these tokens live</h2>
+    </div>
+    <p class="prose">Every value on this page is a custom property declared once in
+    <span class="num">:root</span>. In the build they transfer directly into the Tailwind
+    v4 <span class="num">@theme</span> block in
+    <span class="num">src/styles/index.css</span>, which is the single place a brand
+    change is made. No component carries a raw hex value.</p>
+    <p class="prose muted" style="font-size: var(--t-small)">All page copy shown here is
+    illustrative draft content. No figure, threshold, deadline or rate appears anywhere on
+    this page, and nothing here states that a procedure applies to any reader. Copy
+    requires sign-off by a qualified tax professional before publication.</p>
+  </section>
+
+</div>
