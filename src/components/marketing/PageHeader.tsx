@@ -11,6 +11,8 @@ interface PageHeaderProps {
   crumbs: Crumb[]
   /** Small artwork shown above the title, e.g. a country flag. */
   visual?: ReactNode
+  /** Editorial image placed beside the text on large screens. */
+  aside?: ReactNode
   children?: ReactNode
 }
 
@@ -21,6 +23,7 @@ export function PageHeader({
   summary,
   crumbs,
   visual,
+  aside,
   children,
 }: PageHeaderProps) {
   return (
@@ -28,32 +31,44 @@ export function PageHeader({
       <Container className="relative py-10 sm:py-14">
         <Breadcrumbs items={crumbs} className="enter d-1 mb-8" />
 
-        {eyebrow && (
-          <p className="enter d-2 eyebrow mb-3 flex items-center gap-3">
-            <span className="inline-block h-px w-5 bg-accent" aria-hidden="true" />
-            {eyebrow}
-          </p>
-        )}
+        <div
+          className={
+            aside
+              ? 'grid items-center gap-9 lg:grid-cols-[minmax(0,1fr)_26rem] lg:gap-14'
+              : undefined
+          }
+        >
+          <div className="min-w-0">
+            {eyebrow && (
+              <p className="enter d-2 eyebrow mb-3 flex items-center gap-3">
+                <span className="inline-block h-px w-5 bg-accent" aria-hidden="true" />
+                {eyebrow}
+              </p>
+            )}
 
-        {monoLabel && (
-          <p className="enter d-2 form-number mb-2 text-2xl text-accent sm:text-3xl">
-            {monoLabel}
-          </p>
-        )}
+            {monoLabel && (
+              <p className="enter d-2 form-number mb-2 text-2xl text-accent sm:text-3xl">
+                {monoLabel}
+              </p>
+            )}
 
-        {visual && <div className="enter d-2 mb-5">{visual}</div>}
+            {visual && <div className="enter d-2 mb-5">{visual}</div>}
 
-        <h1 className="enter d-3 max-w-[20ch] text-3xl tracking-[-0.018em] sm:text-4xl">
-          {title}
-        </h1>
+            <h1 className="enter d-3 max-w-[20ch] text-3xl tracking-[-0.018em] sm:text-4xl">
+              {title}
+            </h1>
 
-        {summary && (
-          <p className="enter d-4 mt-5 max-w-[60ch] text-lg leading-[1.68] text-ink-600">
-            {summary}
-          </p>
-        )}
+            {summary && (
+              <p className="enter d-4 mt-5 max-w-[60ch] text-lg leading-[1.68] text-ink-600">
+                {summary}
+              </p>
+            )}
 
-        {children && <div className="enter d-5 mt-7">{children}</div>}
+            {children && <div className="enter d-5 mt-7">{children}</div>}
+          </div>
+
+          {aside && <div className="enter-fade d-4 w-full lg:justify-self-end">{aside}</div>}
+        </div>
       </Container>
 
       <span

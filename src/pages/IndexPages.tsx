@@ -5,6 +5,7 @@ import { CTABand } from '@/components/marketing/CTABand'
 import { Seo, breadcrumbJsonLd } from '@/components/seo/Seo'
 import { Reveal } from '@/components/ui/Reveal'
 import { CountryFlag } from '@/components/marketing/CountryFlag'
+import { Photo } from '@/components/marketing/Photo'
 import { countries, divisions, formsByGroup, servicesByGroup } from '@/lib/content'
 
 /* -------------------------------------------------------------------------- */
@@ -152,18 +153,26 @@ export function CountriesIndexPage() {
               <Reveal as="li" key={c.slug} delay={(i % 3) * 70} className="bg-paper">
                 <Link
                   to={`/countries/${c.slug}/`}
-                  className="group flex h-full gap-4 p-5 transition-colors duration-300 hover:bg-surface"
+                  className="group flex h-full flex-col transition-colors duration-300 hover:bg-surface"
                 >
-                  <CountryFlag
-                    slug={c.slug}
-                    className="mt-1 w-10 transition-transform duration-300 group-hover:scale-105"
+                  <Photo
+                    name={`country-${c.slug}`}
+                    alt=""
+                    className="aspect-[2/1] w-full"
+                    sizes="(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 100vw"
                   />
-                  <span className="min-w-0">
-                    <span className="block font-display text-[1.0625rem] font-semibold text-ink-900 transition-colors duration-300 group-hover:text-accent">
-                      {c.title}
-                    </span>
-                    <span className="mt-1.5 block text-sm leading-relaxed text-ink-600">
-                      {c.summary}
+                  <span className="flex flex-1 items-start gap-3.5 p-5">
+                    <CountryFlag
+                      slug={c.slug}
+                      className="mt-1 w-9 shrink-0 self-start transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <span className="min-w-0">
+                      <span className="block font-display text-[1.0625rem] font-semibold text-ink-900 transition-colors duration-300 group-hover:text-accent">
+                        {c.title}
+                      </span>
+                      <span className="mt-1.5 block text-sm leading-relaxed text-ink-600">
+                        {c.summary}
+                      </span>
                     </span>
                   </span>
                 </Link>

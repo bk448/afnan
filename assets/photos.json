@@ -1,0 +1,114 @@
+[
+  {
+    "name": "country-uk",
+    "id": "photo-1513635269975-59663e0ac1ad",
+    "alt": "Aerial view of the London skyline",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-canada",
+    "id": "photo-1517935706615-2717063c2225",
+    "alt": "The CN Tower above the Toronto skyline at golden hour",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-australia",
+    "id": "photo-1624138784614-87fd1b6528f8",
+    "alt": "Sydney Opera House beside the harbour",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-germany",
+    "id": "photo-1554072675-66db59dba46f",
+    "alt": "The Brandenburg Gate and television tower in Berlin",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-france",
+    "id": "photo-1763680248973-cb7752aabe8f",
+    "alt": "The Eiffel Tower above the Paris cityscape",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-uae",
+    "id": "photo-1512453979798-5ea266f8880c",
+    "alt": "The Burj Khalifa above the Dubai skyline",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-mexico",
+    "id": "photo-1783614221259-107cb8c396be",
+    "alt": "Mexico City skyscrapers against the surrounding mountains",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-spain",
+    "id": "photo-1539037116277-4db20889f2d4",
+    "alt": "The Metropolis building on the Gran Via in Madrid",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-italy",
+    "id": "photo-1752886355870-17e8ebe79a05",
+    "alt": "Rooftops and architecture across Rome",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-netherlands",
+    "id": "photo-1536880756060-98a6a140f0a7",
+    "alt": "An Amsterdam canal lined with historic houses",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-switzerland",
+    "id": "photo-1783713851566-d215ba93bd78",
+    "alt": "Zurich along the river at dusk",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-ireland",
+    "id": "photo-1586724229931-cd4cd3b50ddc",
+    "alt": "Aerial view of Dublin beside the water",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-portugal",
+    "id": "photo-1536663815808-535e2280d2c2",
+    "alt": "Terracotta rooftops above the water in Lisbon",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-israel",
+    "id": "photo-1547483029-77784da27709",
+    "alt": "Aerial view of Tel Aviv along the coast",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-japan",
+    "id": "photo-1513407030348-c983a97b98d8",
+    "alt": "Tokyo Tower lit above the city at dusk",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  },
+  {
+    "name": "country-singapore",
+    "id": "photo-1525625293386-3f8f99389edd",
+    "alt": "Marina Bay Sands above the Singapore waterfront",
+    "credit": "Unsplash",
+    "ratio": 0.5
+  }
+]

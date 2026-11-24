@@ -66,9 +66,9 @@ is not in any page's `modulepreload` set.
 | # | Item | Notes |
 | - | ---- | ----- |
 | 1 | **All 77 content entries are `reviewStatus: 'draft'`** | No tax professional has reviewed any page copy. Highest-liability item on the project. |
-| 2 | **Supabase project not yet created** | Needs a project, the migration run, and `.env.local` populated from `.env.example`. Until then the form shows its failure message. |
+| 2 | **Migration not yet run** | Project `jungletax_afnan` (ref `ryloghtiskodsvlldtnp`) exists and is healthy. Dashboard reports "No migrations" — the table does not exist yet. `.env.local` has the URL but still needs the anon key. |
 | 3 | **No notification on submission** | A request sits in the table until someone looks. Needs an email trigger or a webhook. |
-| 4 | **`/privacy/` does not mention Supabase** | Required now that personal data is stored. Must name the processor, the region, a lawful basis and a retention period. |
+| 4 | **`/privacy/` does not mention Supabase** | Required now that personal data is stored. Must name Supabase as processor, disclose **Seoul (`ap-northeast-2`)** as the processing location and the resulting international transfer, and state a lawful basis and retention period. |
 | 5 | **No spam or abuse control on the insert** | The endpoint is public by design. Consider Turnstile or a Supabase Edge Function in front of the insert. |
 
 ### Not yet started

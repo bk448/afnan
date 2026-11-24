@@ -228,8 +228,11 @@ What the change does introduce:
 - **Data protection duties.** UK/EU GDPR now applies to stored records: a lawful basis, a
   stated retention period, and the ability to honour erasure requests. `/privacy/` must be
   updated to name Supabase as a processor and state where data is held.
-- **Residency.** The Supabase project region determines where the data physically lives.
-  Choose it before going live; it cannot be changed afterwards without a migration.
+- **Residency.** The project runs in **Northeast Asia (Seoul), `ap-northeast-2`**, project
+  ref `ryloghtiskodsvlldtnp`. London was offered and declined on 2026-11-24; the region was
+  kept deliberately, not by default. UK and EU personal data therefore leaves the UK, which
+  `/privacy/` must disclose as an international transfer. Changing region later requires a
+  full data migration.
 
 Security model, in full, in `supabase/migrations/20261124130000_booking_requests.sql`: RLS is on, the
 anon role holds `INSERT` only, and no `SELECT` policy or privilege exists for it. The anon
