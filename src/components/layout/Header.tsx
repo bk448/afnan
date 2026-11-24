@@ -5,6 +5,7 @@ import { ArrowRight, ChevronDown, ChevronLeft, Menu, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
+import { CountryFlag } from '@/components/marketing/CountryFlag'
 import { countries, divisions, formsByGroup, servicesByGroup } from '@/lib/content'
 
 /* ════════════════════════════════════════════════════════════════ wordmark */
@@ -293,15 +294,21 @@ export function Header() {
                         to="/countries/"
                         cta="All countries"
                       />
-                      <ul className="grid min-w-0 flex-1 gap-x-9 gap-y-2 lg:grid-cols-4">
+                      <ul className="grid min-w-0 flex-1 gap-x-8 gap-y-2.5 lg:grid-cols-4">
                         {countries.map((c) => (
                           <li key={c.slug}>
                             <NavigationMenu.Link asChild>
                               <Link
                                 to={`/countries/${c.slug}/`}
-                                className="block text-[0.825rem] text-ink-600 underline-offset-4 transition-colors duration-200 hover:text-accent hover:underline"
+                                className="group flex items-center gap-2.5 text-[0.825rem] text-ink-600 transition-colors duration-200 hover:text-accent"
                               >
-                                {c.title}
+                                <CountryFlag
+                                  slug={c.slug}
+                                  className="w-5 transition-transform duration-200 group-hover:scale-110"
+                                />
+                                <span className="underline-offset-4 group-hover:underline">
+                                  {c.title}
+                                </span>
                               </Link>
                             </NavigationMenu.Link>
                           </li>
@@ -457,14 +464,15 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
         )}
 
         {panel === 'countries' && (
-          <ul className="grid grid-cols-2 gap-x-5 gap-y-3">
+          <ul className="grid grid-cols-1 gap-x-5 gap-y-3.5 sm:grid-cols-2">
             {countries.map((c) => (
               <li key={c.slug}>
                 <Link
                   to={`/countries/${c.slug}/`}
                   onClick={onNavigate}
-                  className="block text-sm text-ink-700"
+                  className="flex items-center gap-3 text-sm text-ink-700"
                 >
+                  <CountryFlag slug={c.slug} className="w-7" />
                   {c.title}
                 </Link>
               </li>

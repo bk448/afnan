@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0E2238"/>
+      <stop offset="100%" stop-color="#0A1A2B"/>
+    </linearGradient>
+    <radialGradient id="warm" cx="78%" cy="18%" r="62%">
+      <stop offset="0%" stop-color="#9A6B3F" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#9A6B3F" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="sphere">
+      <circle cx="930" cy="315" r="210"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#warm)"/>
+
+  <!-- Engraved globe, matching the hero artwork -->
+  <g opacity="0.5">
+    <circle cx="930" cy="315" r="210" fill="none" stroke="#FAF8F5" stroke-opacity="0.22" stroke-width="1.5"/>
+    <g clip-path="url(#sphere)" fill="none" stroke="#FAF8F5" stroke-opacity="0.16" stroke-width="1.3">
+      <ellipse cx="930" cy="181" rx="160" ry="18"/>
+      <ellipse cx="930" cy="248" rx="197" ry="23"/>
+      <ellipse cx="930" cy="315" rx="210" ry="25"/>
+      <ellipse cx="930" cy="382" rx="197" ry="23"/>
+      <ellipse cx="930" cy="449" rx="160" ry="18"/>
+      <ellipse cx="930" cy="315" rx="13" ry="210"/>
+      <ellipse cx="930" cy="315" rx="57" ry="210"/>
+      <ellipse cx="930" cy="315" rx="100" ry="210"/>
+      <ellipse cx="930" cy="315" rx="143" ry="210"/>
+      <ellipse cx="930" cy="315" rx="187" ry="210"/>
+    </g>
+  </g>
+
+  <path d="M803 392C860 280 1006 258 1072 282" fill="none" stroke="#9A6B3F"
+        stroke-width="2.6" stroke-dasharray="6 7" stroke-linecap="round"/>
+  <circle cx="803" cy="392" r="8" fill="#9A6B3F"/>
+  <circle cx="1072" cy="282" r="8" fill="#FAF8F5" fill-opacity="0.85"/>
+
+  <!-- Wordmark -->
+  <rect x="84" y="92" width="3" height="40" fill="#9A6B3F"/>
+  <text x="104" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="30"
+        font-weight="600" fill="#FAF8F5">Jungle Tax</text>
+  <text x="104" y="136" font-family="Helvetica, Arial, sans-serif" font-size="14"
+        letter-spacing="3" fill="#FAF8F5" fill-opacity="0.5">US EXPAT TAX</text>
+
+  <!-- Headline -->
+  <text font-family="Georgia, 'Times New Roman', serif" font-size="68" font-weight="600" fill="#FAF8F5">
+    <tspan x="84" y="310">The US taxes you</tspan>
+    <tspan x="84" y="386">wherever you live.</tspan>
+  </text>
+
+  <text font-family="Helvetica, Arial, sans-serif" font-size="23" fill="#FAF8F5" fill-opacity="0.68">
+    <tspan x="84" y="446">Annual filing, FBAR and FATCA, catch-up</tspan>
+    <tspan x="84" y="480">procedures and cross-border advice.</tspan>
+  </text>
+
+  <rect x="84" y="536" width="190" height="3" fill="#9A6B3F"/>
+</svg>

@@ -3,6 +3,8 @@ import { Container, Section } from '@/components/ui/Container'
 import { PageHeader } from '@/components/marketing/PageHeader'
 import { CTABand } from '@/components/marketing/CTABand'
 import { Seo, breadcrumbJsonLd } from '@/components/seo/Seo'
+import { Reveal } from '@/components/ui/Reveal'
+import { CountryFlag } from '@/components/marketing/CountryFlag'
 import { countries, divisions, formsByGroup, servicesByGroup } from '@/lib/content'
 
 /* -------------------------------------------------------------------------- */
@@ -145,18 +147,27 @@ export function CountriesIndexPage() {
       />
       <Section>
         <Container>
-          <ul className="grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
-            {countries.map((c) => (
-              <li key={c.slug}>
-                <Link to={`/countries/${c.slug}/`} className="group block">
-                  <span className="font-display text-[1.0625rem] font-semibold text-ink-900 underline-offset-4 group-hover:text-accent group-hover:underline">
-                    {c.title}
-                  </span>
-                  <span className="mt-1.5 block text-sm leading-relaxed text-ink-600">
-                    {c.summary}
+          <ul className="grid gap-px overflow-hidden rounded-md border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
+            {countries.map((c, i) => (
+              <Reveal as="li" key={c.slug} delay={(i % 3) * 70} className="bg-paper">
+                <Link
+                  to={`/countries/${c.slug}/`}
+                  className="group flex h-full gap-4 p-5 transition-colors duration-300 hover:bg-surface"
+                >
+                  <CountryFlag
+                    slug={c.slug}
+                    className="mt-1 w-10 transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span className="min-w-0">
+                    <span className="block font-display text-[1.0625rem] font-semibold text-ink-900 transition-colors duration-300 group-hover:text-accent">
+                      {c.title}
+                    </span>
+                    <span className="mt-1.5 block text-sm leading-relaxed text-ink-600">
+                      {c.summary}
+                    </span>
                   </span>
                 </Link>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </Container>

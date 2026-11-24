@@ -9,6 +9,8 @@ interface PageHeaderProps {
   monoLabel?: string
   summary?: string
   crumbs: Crumb[]
+  /** Small artwork shown above the title, e.g. a country flag. */
+  visual?: ReactNode
   children?: ReactNode
 }
 
@@ -18,6 +20,7 @@ export function PageHeader({
   monoLabel,
   summary,
   crumbs,
+  visual,
   children,
 }: PageHeaderProps) {
   return (
@@ -37,6 +40,8 @@ export function PageHeader({
             {monoLabel}
           </p>
         )}
+
+        {visual && <div className="enter d-2 mb-5">{visual}</div>}
 
         <h1 className="enter d-3 max-w-[20ch] text-3xl tracking-[-0.018em] sm:text-4xl">
           {title}

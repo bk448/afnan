@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="8" fill="#0E2238"/>
+  <!-- Meridian globe, matching the hero artwork -->
+  <g fill="none" stroke="#FAF8F5" stroke-opacity="0.5" stroke-width="2">
+    <circle cx="32" cy="32" r="19"/>
+    <ellipse cx="32" cy="32" rx="8" ry="19"/>
+    <path d="M14 26h36M14 38h36"/>
+  </g>
+  <!-- Accent arc: the obligation that follows you -->
+  <path d="M19 42C25 29 41 25 48 29" fill="none" stroke="#9A6B3F" stroke-width="3"
+        stroke-linecap="round"/>
+  <circle cx="19" cy="42" r="4" fill="#9A6B3F"/>
+</svg>

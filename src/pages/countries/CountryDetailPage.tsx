@@ -4,6 +4,7 @@ import { PageHeader } from '@/components/marketing/PageHeader'
 import { CTABand } from '@/components/marketing/CTABand'
 import { RelatedRail } from '@/components/marketing/RelatedRail'
 import { Reveal } from '@/components/ui/Reveal'
+import { CountryFlag } from '@/components/marketing/CountryFlag'
 import { Seo, breadcrumbJsonLd } from '@/components/seo/Seo'
 import { getCountry, resolveServices } from '@/lib/content'
 import { NotFoundPage } from '@/pages/NotFoundPage'
@@ -49,6 +50,13 @@ export function CountryDetailPage() {
         title={country.title}
         summary={country.summary}
         crumbs={crumbs}
+        visual={
+          <CountryFlag
+            slug={country.slug}
+            label={`Flag of ${country.countryName}`}
+            className="w-16 shadow-sm sm:w-20"
+          />
+        }
       />
 
       <Section>
