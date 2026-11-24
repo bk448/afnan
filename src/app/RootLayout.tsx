@@ -24,7 +24,13 @@ export function RootLayout() {
 
       <Header />
 
-      <main id="main" tabIndex={-1} className="flex-1 outline-none">
+      {/* `key` restarts the entrance animation on each navigation. */}
+      <main
+        id="main"
+        key={pathname}
+        tabIndex={-1}
+        className="enter-fade flex-1 outline-none"
+      >
         <Outlet />
       </main>
 

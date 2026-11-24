@@ -66,8 +66,8 @@ export function Footer() {
   return (
     <footer className="mt-auto bg-ink-800 text-white">
       <Container className="py-14">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
-          <div className="lg:col-span-1">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <div className="sm:col-span-2 lg:col-span-3 xl:col-span-1">
             <p className="font-display text-lg font-semibold">Jungle Tax</p>
             <p className="mt-2 max-w-[22rem] text-sm leading-relaxed text-white/65">
               US tax services for American expatriates — annual filing, catch-up procedures and

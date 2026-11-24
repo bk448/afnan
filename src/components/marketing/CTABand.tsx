@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
+import { Reveal } from '@/components/ui/Reveal'
 
 interface CTABandProps {
   heading?: string
@@ -15,12 +16,18 @@ export function CTABand({
   body = 'A consultation establishes your position and the options actually available to you — before anything is filed.',
 }: CTABandProps) {
   return (
-    <section className="border-t border-rule bg-ink-800 text-white">
-      <Container className="py-14 sm:py-16">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+    <section className="paper-grain relative overflow-hidden border-t border-rule bg-ink-800 text-white">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(60rem_28rem_at_82%_-20%,rgba(154,107,63,0.22),transparent_62%)]"
+      />
+      <Container className="relative py-16 sm:py-20">
+        <Reveal className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-[40rem]">
-            <h2 className="font-display text-2xl text-white sm:text-3xl">{heading}</h2>
-            <p className="mt-3.5 text-[1.0625rem] leading-relaxed text-white/70">{body}</p>
+            <h2 className="font-display text-2xl tracking-[-0.015em] text-white sm:text-3xl">
+              {heading}
+            </h2>
+            <p className="mt-4 text-[1.0625rem] leading-[1.68] text-white/70">{body}</p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-3">
             <Button to="/contact/book/" variant="accent">
@@ -34,7 +41,7 @@ export function CTABand({
               Request a Quote
             </Button>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   )

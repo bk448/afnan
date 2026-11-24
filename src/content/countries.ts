@@ -211,9 +211,9 @@ export const countries: Country[] = [
     title: 'US Taxes in the Netherlands',
     seoTitle: 'US Taxes for Americans in the Netherlands',
     seoDescription:
-      'US tax for Americans in the Netherlands: the 30% ruling, box 3 deemed returns and Dutch pension treatment.',
+      'US tax for Americans in the Netherlands: the expatriate ruling, box 3 deemed returns, Dutch pensions and European funds as PFICs.',
     summary:
-      'The Dutch box system and the 30% ruling interact with US rules in ways that need deliberate planning.',
+      'The Dutch box system and the expatriate ruling for inbound employees interact with US rules in ways that need deliberate planning.',
     treaty:
       'The US and the Netherlands have a comprehensive treaty with developed pension provisions, alongside a social security agreement.',
     pensions:
@@ -224,8 +224,8 @@ export const countries: Country[] = [
       'Dutch and European UCITS funds are PFICs. These are standard offerings through Dutch banks and investment platforms.',
     localNotes: [
       {
-        heading: 'The 30% ruling',
-        body: 'The ruling reduces Dutch taxable income for qualifying arrivals, which lowers Dutch tax paid and therefore the foreign tax credit available. It can make the US position worse even while improving the Dutch one, so the two need modelling together.',
+        heading: 'The expatriate ruling for inbound employees',
+        body: 'The Dutch ruling for qualifying inbound employees exempts part of employment income from Dutch tax. The scope and duration of the relief have been narrowed in recent years, so the current terms should be confirmed rather than assumed. For a US citizen it cuts both ways: less Dutch tax paid means less foreign tax credit available, so it can improve the Dutch position while worsening the US one. The two need modelling together.',
       },
       {
         heading: 'Box 3 deemed returns',

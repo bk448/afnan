@@ -214,4 +214,102 @@
   .hairline-b {
     border-block-end: 1px solid var(--color-rule);
   }
+
+  /* Warm, almost-imperceptible depth behind the hero. Not a gradient blob —
+     a single soft light source, the way print stock catches light. */
+  .hero-wash {
+    background-image:
+      radial-gradient(
+        68rem 34rem at 78% -12%,
+        color-mix(in oklab, var(--color-accent) 7%, transparent),
+        transparent 62%
+      ),
+      radial-gradient(
+        52rem 30rem at 6% 112%,
+        color-mix(in oklab, var(--color-ink-800) 5%, transparent),
+        transparent 60%
+      );
+  }
+
+  /* Fine paper grain. Sits under content at very low opacity. */
+  .paper-grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Rule that draws itself in. Used to separate hero from the page. */
+  .rule-draw {
+    transform-origin: left;
+  }
+}
+
+/* ===========================================================================
+   ENTRANCE — on load, for above-the-fold content only.
+   Scroll reveals are handled by the Reveal component.
+   =========================================================================== */
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes draw-rule {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enter {
+    opacity: 0;
+    animation: rise-in 900ms var(--ease-out-quint) forwards;
+  }
+  .enter-fade {
+    opacity: 0;
+    animation: fade-in 1100ms ease-out forwards;
+  }
+  .enter-rule {
+    transform-origin: left;
+    animation: draw-rule 1100ms var(--ease-out-quint) forwards;
+  }
+  .d-1 {
+    animation-delay: 80ms;
+  }
+  .d-2 {
+    animation-delay: 170ms;
+  }
+  .d-3 {
+    animation-delay: 260ms;
+  }
+  .d-4 {
+    animation-delay: 350ms;
+  }
+  .d-5 {
+    animation-delay: 460ms;
+  }
+  .d-6 {
+    animation-delay: 580ms;
+  }
 }
