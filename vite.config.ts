@@ -22,6 +22,10 @@ export default defineConfig({
           if (id.includes('node_modules/react') || id.includes('node_modules/scheduler'))
             return 'react'
           if (id.includes('node_modules/@radix-ui')) return 'radix'
+          // Imported dynamically at submit time only. Kept out of `vendor`
+          // because every one of the 91 pages modulepreloads that chunk, and
+          // the SDK is ~60 kB gzipped for a single INSERT on one page.
+          if (id.includes('node_modules/@supabase')) return 'supabase'
           if (id.includes('node_modules')) return 'vendor'
           return undefined
         },

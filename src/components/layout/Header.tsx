@@ -8,6 +8,24 @@ import { Container } from '@/components/ui/Container'
 import { CountryFlag } from '@/components/marketing/CountryFlag'
 import { countries, divisions, formsByGroup, servicesByGroup } from '@/lib/content'
 
+/**
+ * Nav lists read better as bare place names: "US Taxes in the Netherlands"
+ * wraps and repeats the same four words sixteen times.
+ */
+function navCountryLabel(countryName: string): string {
+  return countryName.replace(/^the\s+/i, '')
+}
+
+/**
+ * Official form names run to a dozen words. Every title carries a short
+ * parenthetical ("Form 3520 (Foreign Trusts & Gifts)") which is what the nav
+ * wants beneath the number.
+ */
+function navFormLabel(title: string, officialName: string): string {
+  const match = title.match(/\(([^)]+)\)\s*$/)
+  return match?.[1] ?? officialName
+}
+
 /* ════════════════════════════════════════════════════════════════ wordmark */
 
 function Wordmark() {
@@ -39,41 +57,48 @@ const trigger =
   'group inline-flex items-center gap-1 px-3 py-2 text-[0.9rem] text-ink-700 transition-colors duration-200 hover:text-ink-900 data-[state=open]:text-accent'
 
 /**
- * Positioned against the <header>, not the nav root, so it spans the full
- * header width. `w-screen` would include the scrollbar and cause horizontal
- * page scroll.
+ * `fixed` against the viewport rather than `absolute` against an ancestor:
+ * Radix positions its own wrappers, so an absolute panel inherits whatever
+ * containing block those create and ends up narrower than the page. Fixed
+ * guarantees a genuinely full-width panel, and `inset-x-0` avoids the
+ * scrollbar-width overflow that `w-screen` causes.
  */
 const panel =
-  'absolute inset-x-0 top-full z-50 max-h-[calc(100vh-4.25rem)] overflow-y-auto border-y border-rule bg-paper shadow-[0_18px_40px_-20px_rgb(14_34_56/0.28)] data-[state=open]:animate-[fade-in_180ms_ease-out]'
+  'fixed inset-x-0 top-[4.25rem] z-50 max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-b border-rule bg-paper shadow-[0_18px_40px_-20px_rgb(14_34_56/0.28)] data-[state=open]:animate-[fade-in_160ms_ease-out]'
 
-/** Left rail: orients the visitor before they scan a long list. */
-function PanelIntro({
+/** Shared shell: fixed-width orienting rail, then the scannable content. */
+function PanelLayout({
   title,
   body,
   to,
   cta,
+  children,
 }: {
   title: string
   body: string
   to: string
   cta: string
+  children: React.ReactNode
 }) {
   return (
-    <div className="shrink-0 border-r border-rule pr-8 lg:w-[14.5rem]">
-      <p className="font-display text-lg font-semibold text-ink-900">{title}</p>
-      <p className="mt-2.5 text-[0.8rem] leading-[1.6] text-ink-600">{body}</p>
-      <NavigationMenu.Link asChild>
-        <Link
-          to={to}
-          className="group mt-4 inline-flex items-center gap-1.5 text-[0.8rem] text-accent underline-offset-4 hover:underline"
-        >
-          {cta}
-          <ArrowRight
-            className="size-3 transition-transform duration-200 group-hover:translate-x-0.5"
-            aria-hidden="true"
-          />
-        </Link>
-      </NavigationMenu.Link>
+    <div className="grid gap-x-10 gap-y-8 lg:grid-cols-[15rem_minmax(0,1fr)]">
+      <div className="lg:border-r lg:border-rule lg:pr-10">
+        <p className="font-display text-lg font-semibold text-ink-900">{title}</p>
+        <p className="mt-2.5 text-[0.825rem] leading-[1.65] text-ink-600">{body}</p>
+        <NavigationMenu.Link asChild>
+          <Link
+            to={to}
+            className="group mt-4 inline-flex items-center gap-1.5 text-[0.825rem] text-accent underline-offset-4 hover:underline"
+          >
+            {cta}
+            <ArrowRight
+              className="size-3 transition-transform duration-200 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
+          </Link>
+        </NavigationMenu.Link>
+      </div>
+      <div className="min-w-0">{children}</div>
     </div>
   )
 }
@@ -84,35 +109,52 @@ interface MenuEntry {
   mono?: string
 }
 
-/** Groups flow into balanced columns; `break-inside-avoid` keeps each intact. */
+/**
+ * Groups pack into balanced columns, each kept whole by `break-inside-avoid`.
+ *
+ * A grid was the obvious choice but aligns rows, so a short group leaves dead
+ * space beside a tall one. Columns only work because the panel is now
+ * genuinely full-width — the earlier breakage was a ~640px panel splitting
+ * into 200px tracks, which wrapped service names one word per line.
+ */
 function PanelGroups({
   groups,
   base,
-  columns = 3,
+  className,
 }: {
   groups: { group: string; items: MenuEntry[] }[]
   base: string
-  columns?: 2 | 3
+  className?: string
 }) {
   return (
-    <div className={cn('min-w-0 flex-1', columns === 3 ? 'lg:columns-3' : 'lg:columns-2', 'gap-9')}>
+    <div className={cn('gap-x-9 sm:columns-2 lg:columns-3', className)}>
       {groups.map((g) => (
-        <div key={g.group} className="mb-6 break-inside-avoid">
-          <p className="eyebrow mb-2.5 border-b border-rule pb-1.5">{g.group}</p>
-          <ul className="space-y-1.5">
+        <div key={g.group} className="mb-7 break-inside-avoid">
+          <p className="mb-2.5 border-b border-rule pb-1.5 text-[0.65rem] font-semibold uppercase leading-tight tracking-[0.09em] text-ink-400">
+            {g.group}
+          </p>
+          <ul className="space-y-2">
             {g.items.map((item) => (
               <li key={item.slug}>
                 <NavigationMenu.Link asChild>
                   <Link
                     to={`${base}${item.slug}/`}
-                    className="group flex items-baseline gap-1.5 text-[0.825rem] leading-snug text-ink-600 transition-colors duration-200 hover:text-accent"
+                    className="group block text-ink-600 transition-colors duration-200 hover:text-accent"
                   >
-                    {item.mono && (
-                      <span className="form-number shrink-0 text-ink-800 transition-colors duration-200 group-hover:text-accent">
-                        {item.mono}
+                    {item.mono ? (
+                      <>
+                        <span className="form-number block text-[0.8rem] font-medium text-ink-900 transition-colors duration-200 group-hover:text-accent">
+                          {item.mono}
+                        </span>
+                        <span className="mt-0.5 block text-[0.75rem] leading-[1.4] text-ink-400 transition-colors duration-200 group-hover:text-accent">
+                          {item.label}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="block text-[0.825rem] leading-[1.45] underline-offset-4 group-hover:underline">
+                        {item.label}
                       </span>
                     )}
-                    <span className="underline-offset-4 group-hover:underline">{item.label}</span>
                   </Link>
                 </NavigationMenu.Link>
               </li>
@@ -173,7 +215,7 @@ export function Header() {
     items: g.items.map((f) => ({
       slug: f.slug,
       mono: f.formNumber,
-      label: f.officialName,
+      label: navFormLabel(f.title, f.officialName),
     })),
   }))
 
@@ -197,22 +239,21 @@ export function Header() {
                 </NavigationMenu.Trigger>
                 <NavigationMenu.Content className={panel}>
                   <Container className="py-9">
-                    <div className="flex gap-9">
-                      <PanelIntro
-                        title="Who we help"
-                        body="Grouped by situation rather than service. Start with whichever sounds most like you."
-                        to="/divisions/"
-                        cta="All divisions"
-                      />
-                      <ul className="grid min-w-0 flex-1 gap-x-9 gap-y-5 lg:grid-cols-3">
+                    <PanelLayout
+                      title="Who we help"
+                      body="Grouped by situation rather than service. Start with whichever sounds most like you."
+                      to="/divisions/"
+                      cta="All divisions"
+                    >
+                      <ul className="grid gap-x-8 gap-y-6 sm:grid-cols-2 xl:grid-cols-3">
                         {divisions.map((d) => (
-                          <li key={d.slug}>
+                          <li key={d.slug} className="min-w-0">
                             <NavigationMenu.Link asChild>
                               <Link to={`/divisions/${d.slug}/`} className="group block">
-                                <span className="font-display text-[0.95rem] font-semibold text-ink-900 transition-colors duration-200 group-hover:text-accent">
+                                <span className="block font-display text-[0.95rem] font-semibold leading-snug text-ink-900 transition-colors duration-200 group-hover:text-accent">
                                   {d.title}
                                 </span>
-                                <span className="mt-1 block text-[0.8rem] leading-[1.55] text-ink-600">
+                                <span className="mt-1.5 block text-[0.8rem] leading-[1.55] text-ink-600">
                                   {d.summary}
                                 </span>
                               </Link>
@@ -220,7 +261,7 @@ export function Header() {
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </PanelLayout>
                     <PanelFooter note="Not sure which fits? Most people overlap two or three." />
                   </Container>
                 </NavigationMenu.Content>
@@ -237,15 +278,14 @@ export function Header() {
                 </NavigationMenu.Trigger>
                 <NavigationMenu.Content className={panel}>
                   <Container className="py-9">
-                    <div className="flex gap-9">
-                      <PanelIntro
-                        title="Services"
-                        body="Twenty-three services across seven areas, from annual filing to catch-up procedures and cross-border planning."
-                        to="/services/"
-                        cta="All services"
-                      />
+                    <PanelLayout
+                      title="Services"
+                      body="Twenty-three services across seven areas, from annual filing to catch-up procedures and cross-border planning."
+                      to="/services/"
+                      cta="All services"
+                    >
                       <PanelGroups groups={serviceGroups} base="/services/" />
-                    </div>
+                    </PanelLayout>
                     <PanelFooter note="Looking for a specific IRS form instead? See Forms." />
                   </Container>
                 </NavigationMenu.Content>
@@ -262,15 +302,14 @@ export function Header() {
                 </NavigationMenu.Trigger>
                 <NavigationMenu.Content className={panel}>
                   <Container className="py-9">
-                    <div className="flex gap-9">
-                      <PanelIntro
-                        title="Forms"
-                        body="Thirty US tax forms explained in plain English, each linked to the service that handles it."
-                        to="/forms/"
-                        cta="All forms"
-                      />
+                    <PanelLayout
+                      title="Forms"
+                      body="Thirty US tax forms explained in plain English, each linked to the service that handles it."
+                      to="/forms/"
+                      cta="All forms"
+                    >
                       <PanelGroups groups={formGroups} base="/forms/" />
-                    </div>
+                    </PanelLayout>
                     <PanelFooter note="Every form page links back to the service that files it." />
                   </Container>
                 </NavigationMenu.Content>
@@ -287,16 +326,15 @@ export function Header() {
                 </NavigationMenu.Trigger>
                 <NavigationMenu.Content className={panel}>
                   <Container className="py-9">
-                    <div className="flex gap-9">
-                      <PanelIntro
-                        title="Countries"
-                        body="Treaty position, local pension treatment, filing deadlines and the investment products that cause trouble."
-                        to="/countries/"
-                        cta="All countries"
-                      />
-                      <ul className="grid min-w-0 flex-1 gap-x-8 gap-y-2.5 lg:grid-cols-4">
+                    <PanelLayout
+                      title="Countries"
+                      body="Treaty position, local pension treatment, filing deadlines and the investment products that cause trouble."
+                      to="/countries/"
+                      cta="All countries"
+                    >
+                      <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {countries.map((c) => (
-                          <li key={c.slug}>
+                          <li key={c.slug} className="min-w-0">
                             <NavigationMenu.Link asChild>
                               <Link
                                 to={`/countries/${c.slug}/`}
@@ -304,17 +342,17 @@ export function Header() {
                               >
                                 <CountryFlag
                                   slug={c.slug}
-                                  className="w-5 transition-transform duration-200 group-hover:scale-110"
+                                  className="w-5 shrink-0 transition-transform duration-200 group-hover:scale-110"
                                 />
-                                <span className="underline-offset-4 group-hover:underline">
-                                  {c.title}
+                                <span className="truncate underline-offset-4 group-hover:underline">
+                                  {navCountryLabel(c.countryName)}
                                 </span>
                               </Link>
                             </NavigationMenu.Link>
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </PanelLayout>
                     <PanelFooter note="Sixteen guides, each following the same structure." />
                   </Container>
                 </NavigationMenu.Content>
@@ -472,8 +510,8 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
                   onClick={onNavigate}
                   className="flex items-center gap-3 text-sm text-ink-700"
                 >
-                  <CountryFlag slug={c.slug} className="w-7" />
-                  {c.title}
+                  <CountryFlag slug={c.slug} className="w-7 shrink-0" />
+                  <span className="truncate">{navCountryLabel(c.countryName)}</span>
                 </Link>
               </li>
             ))}
@@ -514,10 +552,14 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
                     <Link
                       to={`/forms/${f.slug}/`}
                       onClick={onNavigate}
-                      className="flex items-baseline gap-2 text-sm leading-snug"
+                      className="flex items-baseline gap-2.5 text-sm leading-snug"
                     >
-                      <span className="form-number shrink-0 text-ink-900">{f.formNumber}</span>
-                      <span className="text-ink-600">{f.officialName}</span>
+                      <span className="form-number w-[5.5rem] shrink-0 text-ink-900">
+                        {f.formNumber}
+                      </span>
+                      <span className="min-w-0 text-ink-600">
+                        {navFormLabel(f.title, f.officialName)}
+                      </span>
                     </Link>
                   </li>
                 ))}

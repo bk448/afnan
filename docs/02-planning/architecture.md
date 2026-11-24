@@ -206,10 +206,39 @@ Out of scope, deliberately:
 - Collecting SSN/ITIN, income figures, or tax documents
 - File upload of any kind
 - Client authentication or account areas
-- Storing submissions in a database
 
-This keeps the project clear of IRS Pub 4557 and FTC Safeguards obligations, and is why
-the backend is one function. Secure document exchange stays in the firm's existing portal.
+This keeps the project clear of IRS Pub 4557 and FTC Safeguards obligations. Secure
+document exchange stays in the firm's existing portal.
+
+### 7.1 Revision — consultation requests are now persisted (2026-11-24)
+
+This section previously listed "storing submissions in a database" as out of scope. That
+boundary has been **lifted by decision of the firm**: booking requests now persist to
+Supabase (`booking_requests`), because a form that submits nowhere cannot serve the site's
+single purpose.
+
+The other three exclusions above still hold, and they are what keep this change
+proportionate — the table contains no tax identifier, no income figure and no document.
+
+What the change does introduce:
+
+- **Personal data at rest.** Name, email, country of residence and a free-text note, plus
+  situation flags that can imply a visitor is behind on US filing. That last point is the
+  sensitive part and is why the table is write-only from the browser.
+- **Data protection duties.** UK/EU GDPR now applies to stored records: a lawful basis, a
+  stated retention period, and the ability to honour erasure requests. `/privacy/` must be
+  updated to name Supabase as a processor and state where data is held.
+- **Residency.** The Supabase project region determines where the data physically lives.
+  Choose it before going live; it cannot be changed afterwards without a migration.
+
+Security model, in full, in `supabase/migrations/0001_booking_requests.sql`: RLS is on, the
+anon role holds `INSERT` only, and no `SELECT` policy or privilege exists for it. The anon
+key in the bundle is therefore write-only. Reading submissions requires the `service_role`
+key, which must never reach the client.
+
+Still outstanding: no spam/abuse control on the insert endpoint, and no notification — a
+submitted request sits in the table until someone looks. See
+`docs/03-implementation/progress.md`.
 
 ---
 

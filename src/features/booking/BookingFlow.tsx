@@ -13,6 +13,7 @@ import {
   type BookingValues,
   type SituationId,
 } from './schema'
+import { SUBMIT_FAILURE_MESSAGE, submitBooking } from './submitBooking'
 
 type Errors = Partial<Record<keyof BookingValues, string>>
 
@@ -21,6 +22,8 @@ const STEP_LABELS = ['Your situation', 'Where you live', 'A few details', 'Conta
 export function BookingFlow() {
   const [step, setStep] = useState(0)
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [errors, setErrors] = useState<Errors>({})
   const [values, setValues] = useState<Partial<BookingValues>>({
     situations: [],
@@ -59,7 +62,7 @@ export function BookingFlow() {
     if (prev !== undefined) setStep(prev)
   }
 
-  const submit = () => {
+  const submit = async () => {
     const result = bookingSchema.safeParse(values)
     if (!result.success) {
       const next: Errors = {}
@@ -70,7 +73,17 @@ export function BookingFlow() {
       setErrors(next)
       return
     }
-    // Submission adapter: no backend wired yet. See docs/02-planning/architecture.md
+
+    setSubmitError(null)
+    setSubmitting(true)
+    const outcome = await submitBooking(result.data)
+    setSubmitting(false)
+
+    // The answers stay on screen on failure, so nothing has to be retyped.
+    if (!outcome.ok) {
+      setSubmitError(SUBMIT_FAILURE_MESSAGE)
+      return
+    }
     setSubmitted(true)
   }
 
@@ -256,16 +269,27 @@ export function BookingFlow() {
         </Fieldset>
       )}
 
+      {submitError && (
+        <p
+          role="alert"
+          className="mt-8 rounded-sm border border-alert bg-alert-100 p-4 text-sm leading-relaxed text-alert-700"
+        >
+          {submitError}
+        </p>
+      )}
+
       <div className="mt-8 flex items-center justify-between gap-4 border-t border-rule pt-6">
         {position > 0 ? (
-          <Button variant="ghost" onClick={goBack}>
+          <Button variant="ghost" onClick={goBack} disabled={submitting}>
             Back
           </Button>
         ) : (
           <span />
         )}
         {step === 3 ? (
-          <Button onClick={submit}>Request consultation</Button>
+          <Button onClick={() => void submit()} disabled={submitting}>
+            {submitting ? 'Sending…' : 'Request consultation'}
+          </Button>
         ) : (
           <Button onClick={goNext}>Continue</Button>
         )}

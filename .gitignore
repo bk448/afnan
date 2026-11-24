@@ -69,3 +69,6 @@ lerna-debug.log*
 # Deployment
 .vercel
 .netlify
+
+# Visual-check output
+.screenshots/

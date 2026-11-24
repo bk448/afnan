@@ -59,7 +59,15 @@ const FLAGS: Record<CountrySlug, React.ReactElement> = {
       <path d={MAPLE} fill="#D80621" />
     </>
   ),
-  mexico: <Vertical colors={['#006847', '#fff', '#CE1126']} />,
+  // Without its coat of arms Mexico is indistinguishable from Italy, and the
+  // two sit together in the nav. A muted ring marks the emblem's position
+  // rather than fabricating the eagle.
+  mexico: (
+    <>
+      <Vertical colors={['#006847', '#fff', '#CE1126']} />
+      <circle cx={15} cy={10} r={3.2} fill="none" stroke="#7A5C2E" strokeWidth="1.3" />
+    </>
+  ),
   germany: <Horizontal colors={['#000', '#DD0000', '#FFCE00']} />,
   france: <Vertical colors={['#002395', '#fff', '#ED2939']} />,
   italy: <Vertical colors={['#009246', '#fff', '#CE2B37']} />,

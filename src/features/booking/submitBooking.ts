@@ -31,14 +31,17 @@ function toRow(values: BookingValues) {
 }
 
 /**
- * Writes one consultation request. Deliberately does not chain `.select()`:
- * the anon role holds INSERT only, so asking for the row back would fail.
+ * Writes one consultation request.
+ *
+ * Deliberately does not chain `.select()`: the anon role holds INSERT only, so
+ * asking for the row back would be refused by row level security.
  */
 export async function submitBooking(values: BookingValues): Promise<SubmitResult> {
-  const supabase = getSupabaseClient()
-  if (!supabase) return { ok: false, reason: 'unconfigured' }
-
   try {
+    // Loading the SDK is itself a network fetch and can fail on a bad connection.
+    const supabase = await getSupabaseClient()
+    if (!supabase) return { ok: false, reason: 'unconfigured' }
+
     const { error } = await supabase.from('booking_requests').insert(toRow(values))
     if (error) return { ok: false, reason: 'rejected' }
     return { ok: true }
